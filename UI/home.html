@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Home | Shopping List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+        crossorigin="anonymous">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link href="styles.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <nav class="navbar navbar-fixed-top drop-shadow" id="home-navbar">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Shopping List</a>
+            </div>
+
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" class="navbar-link">Hi Simon Peter!</a>
+                    </li>
+                    <li>
+                        <a href="login.html" class="navbar-link">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="wrapper">
+        <div class="home-wrapper">
+            <div id="card-bucket" class="card-container">
+
+                <h4>From the Supermarket</h4>
+
+                <div class="card-icon-holder" id="card-icon-holder">
+                    <a id="add-activity" href="#">
+                            <i class="icons fa-plus-circle"></i>
+                        </a>
+
+                    <a id="edit-bucket" href="#">
+                            <i class="icons fa-pencil"></i>
+                        </a>
+
+                    <a id="share-bucket" href="#"> 
+                            <i class="icons fa-share-alt"></i>
+                        </a>
+
+                    <a id="delete-bucket" href="#">
+                            <i class="icons fa-trash"></i>
+                        </a>
+                </div>
+
+                <div style="overflow-y: auto;height: 360px;padding: 8px;">
+
+                    <div id="card-activity" class="list-card">
+                        <div id="label-activity">
+                            <div>
+                                <a href="#">
+                                    <div>
+                                        <h4>Tooth Paste</h4>
+                                    </div>
+
+                                    <div>
+                                        <h6>
+                                            SHS 4,000
+                                        </h6>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <input id="checkbox-activity" style="float: right;margin-top: -36px;margin-bottom: 5px;" type="checkbox">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <a class="btn-fab round-button" href="#">
+        <i class="fab-icon fa-plus"></i>
+    </a>
+</body>
+
+</html>
