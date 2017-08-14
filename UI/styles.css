@@ -50,7 +50,7 @@ a:hover {
     min-height: 400px;
 }
 
-.register-card .title {
+.register-card, .title {
     color: #FFFFFF;
     text-align: center;
 }
@@ -64,4 +64,12 @@ a:hover {
     margin-left: 35%;
     width: 30%;
     color: rgba(94, 99, 255, 1)
+}
+
+.login-wrapper {
+    padding-top: 9%;
+}
+
+.login-card{
+    min-height: 300px;
 }
