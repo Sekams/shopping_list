@@ -2,7 +2,7 @@
 class ShoppingList(object):
     """This class describes the structure of the ShoppingList object"""
 
-    def __init__(self, title, items={}):
+    def __init__(self, title, items):
         """This method creates an instance of the ShoppingList class"""
         pass
 
