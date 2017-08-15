@@ -14,7 +14,7 @@ class TestShoppingList(unittest.TestCase):
 
         self.items = {self.item_1.name: self.item_1,
                       self.item_2.name: self.item_2}
-        self.shopping_list_1 = ShoppingList('From the farmers market')
+        self.shopping_list_1 = ShoppingList('From the farmers market', {})
         self.shopping_list_2 = ShoppingList('From the supermarket', self.items)
 
     def test_shopping_list_instance(self):
@@ -37,9 +37,8 @@ class TestShoppingList(unittest.TestCase):
 
     def test_remove_item(self):
         """This method tests if the class removes an item from ShoppingList instances"""
-        before = len(self.shopping_list_1.items)
-        self.shopping_list_1.remove_item(self.item_3)
-        after = len(self.shopping_list_1.items)
+        before = len(self.shopping_list_1.add_item(self.item_3))
+        after = len(self.shopping_list_1.remove_item(self.item_3))
         self.assertEqual(1, before - after,
                          msg='The object should remove an item from the instance')
 
