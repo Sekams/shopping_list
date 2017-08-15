@@ -4,16 +4,21 @@ class ShoppingList(object):
 
     def __init__(self, title, items):
         """This method creates an instance of the ShoppingList class"""
-        pass
+        self.title = title
+        self.items = items
 
     def add_item(self, item):
         """This method creates an item in the ShoppingList instance"""
-        pass
+        self.items[item.name] = item
+        return self.items
 
     def remove_item(self, item):
         """This method removes an item from the ShoppingList instance"""
-        pass
+        if item.name in self.items.keys():
+            del self.items[item.name]
+        return self.items
 
     def change_title(self, title):
         """This method changes the title of the ShoppingList instance"""
-        pass
+        self.title = title
+        return self.title
