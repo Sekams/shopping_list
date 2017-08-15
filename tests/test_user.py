@@ -43,9 +43,8 @@ class TestUser(unittest.TestCase):
 
     def test_remove_shopping_list(self):
         """This method tests if the class removes a shopping list from User instances"""
-        before = len(self.user_no_list.shopping_lists)
-        self.user_no_list.remove_shopping_list(self.shopping_list_2)
-        after = len(self.user_no_list.shopping_lists)
+        before = len(self.user_no_list.create_shopping_list(self.shopping_list_2))
+        after = len(self.user_no_list.remove_shopping_list(self.shopping_list_2))
         self.assertEqual(1, before - after,
                          msg='The object should remove a shopping list from the instance')
 
