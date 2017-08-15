@@ -30,3 +30,16 @@ pip install -r requirements.txt
 python run.py
 ```
 5. After successfully running the application, one can explore the features of the BucketList app by navigation to the address: http://127.0.0.1:5000 in any web browser of choice
+
+## Features
+* Account creation
+* User session manegement (Login and Logout)
+* Shopping list creation, management and delete
+* Shopping list item creation, management and delete
+* Shopping list sharing
+
+## Testing
+The application's tests can be executed by running the code below within the virtual environment:
+```
+python test_script.py
+```
