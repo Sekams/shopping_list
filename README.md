@@ -4,13 +4,21 @@
 
 ## Technologies
 1. Python==3.6.1
-2. click==6.7
-3. Flask==0.12.2
-4. itsdangerous==0.24
-5. Jinja2==2.9.6
-6. MarkupSafe==1.0
-7. nose==1.3.7
-8. Werkzeug==0.12.2
+2. astroid==1.5.3
+3. click==6.7
+4. colorama==0.3.9
+5. Flask==0.12.2
+6. isort==4.2.15
+7. itsdangerous==0.24
+8. Jinja2==2.9.6
+9. lazy-object-proxy==1.3.1
+10. MarkupSafe==1.0
+11. mccabe==0.6.1
+12. nose==1.3.7
+13. pylint==1.7.2
+14. six==1.10.0
+15. Werkzeug==0.12.2
+16. wrapt==1.10.11
 
 ## Getting Started
 To be able to use the application locally, one should follow the guidelines highlighted below.
