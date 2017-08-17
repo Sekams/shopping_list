@@ -212,7 +212,7 @@ a:hover {
     -moz-osx-font-smoothing: grayscale;
 }
 
-a.button {
+button {
     display: inline-block;
     padding: 6px 12px;
     margin-bottom: 0;
