@@ -165,6 +165,20 @@ class TestShoppingListApplication(unittest.TestCase):
         self.assertFalse(self.application.users[self.user_1.username].shopping_lists["Homers shopping list"].items["Tooth paste"].status,
                          msg='The object status should be False')
 
+    def test_get_all_lists(self):
+        """This method tests if the class successfully adds shared shopping lists to the total lists of a user"""
+        self.application.signup(self.user_1.first_name, self.user_1.last_name,
+                                self.user_1.username, self.user_1.password)
+        self.application.login(self.user_1.username, self.user_1.password)
+        self.application.create_shopping_list(
+            "Homers shopping list", self.user_1.username)
+        self.application.share_shopping_list(
+            "Homers shopping list", self.user_1.username)
+        self.application.signup(self.user_2.first_name, self.user_2.last_name,
+                                self.user_2.username, self.user_2.password)
+        self.assertTrue("Homers shopping list" in self.application.get_all_lists(self.user_2.username).keys(),
+                        msg='The object should contain the list `Homers shopping list`')
+
 
 if __name__ == "__main__":
     unittest.main()
