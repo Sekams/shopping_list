@@ -3,6 +3,7 @@ from app.models.item import Item
 from app.models.shopping_list import ShoppingList
 from app.models.user import User
 
+
 class ShoppingListApplication(object):
     """This This class describes the structure of the ShoppingListApplication object"""
 
@@ -77,7 +78,8 @@ class ShoppingListApplication(object):
                     if title in self.sharing_pool[user.username].keys():
                         not_existing = False
                 if not_existing:
-                    self.sharing_pool[user.username] = {title:user.shopping_lists[title]}
+                    self.sharing_pool[user.username] = {
+                        title: user.shopping_lists[title]}
                     return True
         return False
 
@@ -131,18 +133,16 @@ class ShoppingListApplication(object):
                     return item2.change_status(new_status)
         return None
 
-
     def get_all_lists(self, username):
         """This method gets all the shopping lists for a user"""
-        if username in self.logged_in.keys() and self.logged_in[username]:
-            if username in self.users.keys():
-                user = self.users[username]
-                if self.sharing_pool:
-                    for share_username, shopping_list_dict in self.sharing_pool.items():
-                        if not share_username == user.username:
-                            for title, shared_shopping_list in shopping_list_dict.items():
-                                if title not in user.shopping_lists.keys():
-                                    user.shopping_lists[title] = shared_shopping_list
-                                    break
-                return user.shopping_lists
-            return {}
+        if username in self.logged_in.keys() and self.logged_in[username] and username in self.users.keys():
+            user = self.users[username]
+            if self.sharing_pool:
+                for share_username, shopping_list_dict in self.sharing_pool.items():
+                    if not share_username == user.username:
+                        for title, shared_shopping_list in shopping_list_dict.items():
+                            if title not in user.shopping_lists.keys():
+                                user.shopping_lists[title] = shared_shopping_list
+                                break
+            return user.shopping_lists
+        return {}
