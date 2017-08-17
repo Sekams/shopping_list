@@ -1,0 +1,17 @@
+anguage: python
+
+python:
+  - 3.6.1
+
+install: 
+  - pip install -r requirements.txt
+  - pip install coveralls
+
+env:
+  CODECLIMATE_REPO_TOKEN: 2a80915b247c484d8bd14ce7b8919789ab35f6c501390f8387610aaf69aa7d08
+
+script:
+  - nosetests --with-coverage --cover-package=app
+
+after_success:
+  - coveralls
