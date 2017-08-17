@@ -1,0 +1,9 @@
+engines:
+  # ... CONFIG CONTENT ...
+  radon:
+    enabled: true
+    # ... CONFIG CONTENT ...
+    checks:
+      Complexity:
+        enabled: false
+# ... CONFIG CONTENT ...
