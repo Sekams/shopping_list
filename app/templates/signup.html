@@ -7,6 +7,8 @@
         crossorigin="anonymous">
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <link href="../static/css/styles.css" rel="stylesheet" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -29,21 +31,71 @@
     <div class="register-wrapper">
         <div class="card register-card drop-shadow">
             <h3 class="title">Sign Up</h3>
-            <form action="/signup" method="post" class="register-form">
+            <form id="sign_up_form_id" name="sign_up_form" action="/signup" method="post" class="register-form">
                 <input name="first_name" type="text" class="form-input form-control" placeholder="First Name">
 
                 <input name="last_name" class="form-input form-control" type="text" placeholder="Last Name">
 
                 <input name="username" type="text" class="form-input form-control" placeholder="Username">
 
-                <input type="password" class="form-input form-control" placeholder="Password">
+                <input name="password" type="password" class="form-input form-control" placeholder="Password">
 
-                <input name="password" type="password" class="form-input form-control" placeholder="Confirm Password">
+                <input name="confirm_password" type="password" class="form-input form-control" placeholder="Confirm Password">
 
-                <button type="submit" class="btn btn-form-submit">Finish</button>
+                <button type="button" class="btn btn-form-submit" onclick="validate_inputs()">Finish</button>
             </form>
         </div>
     </div>
+
+    <div><div id="snackbar"></div>
 </body>
 
 </html>
+
+<script type="text/javascript">
+    function validate_inputs() {
+        var username_value = document.forms["sign_up_form"]["username"].value;
+        var password_value = document.forms["sign_up_form"]["password"].value;
+        var confirm_password_value = document.forms["sign_up_form"]["confirm_password"].value;
+        var first_name_value = document.forms["sign_up_form"]["first_name"].value;
+        var last_name_value = document.forms["sign_up_form"]["last_name"].value;
+        
+        if (first_name_value.replace(" ", "") == "") {
+            show_snack_bar("Please enter first name", 3000, "danger")
+        }
+        else if (last_name_value.replace(" ", "") == "") {
+            show_snack_bar("Please enter Last name", 3000, "danger")
+        }
+        else if (username_value.replace(" ", "") == "") {
+            show_snack_bar("Please enter username", 3000, "danger")
+        }
+        else if (username_value.replace(" ", "") != username_value || username_value.length < 3) {
+            show_snack_bar("Username should not contain spaces and should be more than 3  characters long ", 3000, "danger")
+        }
+        else if (password_value == "") {
+            show_snack_bar("Please enter password ", 3000, "danger")
+        }
+        else if (password_value != confirm_password_value) {
+            show_snack_bar("Passwords dont match!", 3000, "danger")
+        }
+        else {
+            document.getElementById("sign_up_form_id").submit();
+        }
+    }
+
+    function show_snack_bar(message, duration, type) {
+        var snack_bar = document.getElementById("snackbar")
+        snack_bar.innerHTML='<p>'+message+'</p>';
+        if (type == "danger") {
+            snack_bar.className += ' danger-snackbar';
+        }
+        else {
+            snack_bar.className += ' success-snackbar';
+        }
+        snack_bar.className += " show";
+        setTimeout(
+            function() { 
+                snack_bar.className = snack_bar.className.replace(" show", "").replace(" danger-snackbar", "").replace(" success-snackbar", ""); 
+            }, duration);
+    }
+</script>

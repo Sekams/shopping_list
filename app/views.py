@@ -19,7 +19,8 @@ def index():
         shares = len(the_application.sharing_pool)
         all_list_dict = the_application.get_all_lists(username)
         return render_template("home.html", shopping_list_dict=all_list_dict, shares=shares,
-                               first_name=the_application.users[username].first_name)
+                               first_name=the_application.users[username].first_name, number_of_lists=len(all_list_dict))
+                               
     return render_template("login.html")
 
 
