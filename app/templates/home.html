@@ -10,6 +10,7 @@
     <link href="../static/css/styles.css" rel="stylesheet" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>var list_number = parseInt("{{number_of_lists}}")</script>
 </head>
 
 <body>
@@ -90,8 +91,10 @@
     </div>
 
     <a class="btn-fab round-button" onclick="generateModal('crud-div', 'Create Shopping List', '/create_shopping_list', 'form_add_shopping_list', 'title', 'Enter Title', '', '', '', '')">
-            <i class="fab-icon fa-plus"></i>
-        </a>
+        <i class="fab-icon fa-plus"></i>
+    </a>
+
+    <div><div id="snackbar"></div>
 </body>
 
 </html>
@@ -150,5 +153,25 @@
 
     function changeItemStatus(list_title, name, check_box) {
         window.location.href = "/check_item_toggle?list_title="+list_title+"&name="+name+"&new_status="+check_box.checked;
+    }
+
+    function show_snack_bar(message, duration, type) {
+        var snack_bar = document.getElementById("snackbar")
+        snack_bar.innerHTML='<p>'+message+'</p>';
+        if (type == "danger") {
+            snack_bar.className += ' danger-snackbar';
+        }
+        else {
+            snack_bar.className += ' success-snackbar';
+        }
+        snack_bar.className += " show";
+        setTimeout(
+            function() { 
+                snack_bar.className = snack_bar.className.replace(" show", "").replace(" danger-snackbar", "").replace(" success-snackbar", ""); 
+            }, duration);
+    }
+
+    if (list_number == 0) {
+        show_snack_bar("Welcome to Shopping List! </br> Click the button in the bottom right corner to add a Shopping List :)", 5000, "success");
     }
 </script>
