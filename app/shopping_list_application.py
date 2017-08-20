@@ -107,7 +107,8 @@ class ShoppingListApplication(object):
                     item.rename(new_name)
                     item.change_price(new_price)
                     shopping_list2.items[new_name] = item
-                    del shopping_list2.items[old_name]
+                    if not old_name == new_name:
+                        del shopping_list2.items[old_name]
                     return item.name == new_name and item.price == new_price
         return False
 

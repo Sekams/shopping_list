@@ -34,5 +34,6 @@ class User(object):
             shopping_list = self.shopping_lists[old_title]
             shopping_list.change_title(new_title)
             self.shopping_lists[new_title] = shopping_list
-            del self.shopping_lists[old_title]
+            if not old_title == new_title:
+                del self.shopping_lists[old_title]
         return self.shopping_lists[new_title]

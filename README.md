@@ -42,7 +42,7 @@ pip install -r requirements.txt
 ```
 python run.py
 ```
-5. After successfully running the application, one can explore the features of the BucketList app by navigation to the address: http://127.0.0.1:5000 in any web browser of choice
+5. After successfully running the application, one can explore the features of the Shopping List application by navigation to the address: http://127.0.0.1:5000 in any web browser of choice
 
 ## Features
 * Account creation

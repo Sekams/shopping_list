@@ -9,6 +9,9 @@
     <link href="../static/css/styles.css" rel="stylesheet" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        var message = "{{message}}";
+    </script>
 </head>
 
 <body>
@@ -75,5 +78,12 @@
         }
         snack_bar.className += " show";
         setTimeout(function(){ snack_bar.className = snack_bar.className.replace(" show", "").replace(" danger-snackbar", "").replace(" success-snackbar", ""); }, duration);
+    }
+    type = "danger"
+    if (message.toLowerCase().includes("success")){
+        type = "success"
+    }
+    if (message != "None") {
+        show_snack_bar(message, 3000, type);
     }
 </script>

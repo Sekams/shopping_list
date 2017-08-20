@@ -10,7 +10,10 @@
     <link href="../static/css/styles.css" rel="stylesheet" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script>var list_number = parseInt("{{number_of_lists}}")</script>
+    <script>
+        var list_number = parseInt("{{number_of_lists}}");
+        var message = "{{message}}";
+    </script>
 </head>
 
 <body>
@@ -40,11 +43,11 @@
                     <div id="card-shopping" class="card-container">
                         <h4>{{title}}</h4>
                         <div class="card-icon-holder" id="card-icon-holder">
-                            <a id="add-item" onclick="generateModal('crud-div', 'Add Item', '/add_item', 'form_add_item_id', 'name', 'Enter Item Name', 'price_id', 'list_title', '{{ title }}', '')">
+                            <a id="add-item" onclick="generateModal('crud-div', 'Add Item', '/add_item', 'form_add_item_id', 'name', 'Enter Item Name', 'price_id', 'list_title', '{{ title }}', '', '')">
                                 <i class="icons fa-plus-circle"></i>
                             </a>
 
-                            <a id="edit-shopping" onclick="generateModal('crud-div', 'Edit Shopping List', '/edit_shopping_list', 'form_edit_shopping_list', 'new_title', 'Enter New Title', '', 'old_title', '{{ title }}', '')">
+                            <a id="edit-shopping" onclick="generateModal('crud-div', 'Edit Shopping List', '/edit_shopping_list', 'form_edit_shopping_list', 'new_title', 'Enter New Title', '', 'old_title', '{{ title }}', '', '')">
                                 <i class="icons fa-pencil"></i>
                             </a>
 
@@ -62,7 +65,7 @@
                                         <div id="card-item" class="list-card">
                                             <div id="label-item">
                                                 <div>
-                                                    <a onclick="generateModal('crud-div', 'Edit `{{ name }}` Item', '/edit_item', 'form_edit_item', 'new_name', 'Enter New Name', 'price_id', 'list_title', '{{ title }}', '{{ name }}')">
+                                                    <a onclick="generateModal('crud-div', 'Edit `{{ name }}` Item', '/edit_item', 'form_edit_item', 'new_name', 'Enter Item Name', 'price_id', 'list_title', '{{ title }}', '{{ name }}', '{{item.price}}')">
                                                         <div>
                                                             <h4>{{name}}</h4>
                                                         </div>
@@ -90,7 +93,7 @@
     <div class="card-modal" id="crud-div" style="display: none">
     </div>
 
-    <a class="btn-fab round-button" onclick="generateModal('crud-div', 'Create Shopping List', '/create_shopping_list', 'form_add_shopping_list', 'title', 'Enter Title', '', '', '', '')">
+    <a class="btn-fab round-button" onclick="generateModal('crud-div', 'Create Shopping List', '/create_shopping_list', 'form_add_shopping_list', 'title', 'Enter Title', '', '', '', '', '')">
         <i class="fab-icon fa-plus"></i>
     </a>
 
@@ -100,12 +103,9 @@
 </html>
 
 <script type="text/javascript">
-    function generateModal(parent_id, modal_title, action, form_id, visible_input_name, visible_input_placeholder, price_id, hidden_input_name, hidden_input_value, edit_item) {
+    function generateModal(parent_id, modal_title, action, form_id, visible_input_name, visible_input_placeholder, price_id, hidden_input_name, hidden_input_value, edit_item, old_price) {
         
         var price = '', hidden_input = '', buttons = '<button class="btn btn-form-submit btn-modal-form-submit" type="submit">Save</button>';
-        if (!(price_id === "")){
-            price = '<input id="price_input" name="price" type="number" class="form-input form-control" placeholder="Enter Price">';
-        }
         if (!(hidden_input_name === "") && !(hidden_input_value === "")) {
             hidden_input = '<input type="text" name="'+hidden_input_name+'" value="'+hidden_input_value+'" style="display: none" >'
         }
@@ -120,6 +120,13 @@
                 + '        <button class="btn btn-form-submit" style="display: inline-block; margin-left: 0%; width: 80%;" type="submit">Save</button>'
                 + '    </div>'
                 + '</div>';
+                hidden_input_value = edit_item;
+        }
+        if (!(price_id === "")){
+            price = '<input id="price_input" name="price" value="'+ old_price +'" type="number" class="form-input form-control" placeholder="Enter Price">';
+            if (old_price === ""){
+                hidden_input_value = ""
+            }
         }
         document.getElementById(parent_id).innerHTML=''
             + '<div class="card crud-card drop-shadow">'
@@ -127,7 +134,7 @@
             + '    <h3 class="title crud-title">'+modal_title+'</h3>'
             + '    <form action="'+action+'" method="post" class="register-form" id="'+form_id+'">'
             + '        ' +hidden_input
-            + '        <input id="visible_input" name="'+visible_input_name+'" type="text" class="form-control" placeholder="'+visible_input_placeholder+'">'
+            + '        <input id="visible_input" name="'+visible_input_name+'" type="text" class="form-control" value="' + hidden_input_value + '" placeholder="'+visible_input_placeholder+'">'
             + '        ' +price
             + '        ' +buttons
             + '    </form>'
@@ -171,7 +178,14 @@
             }, duration);
     }
 
-    if (list_number == 0) {
-        show_snack_bar("Welcome to Shopping List! </br> Click the button in the bottom right corner to add a Shopping List :)", 5000, "success");
+    if (message != "None") {
+        type = "success"
+        if (message.toLowerCase().includes("wrong")){
+            type = "danger"
+        }
+        if (list_number == 0) {
+            message = message + "<br/> Welcome to Shopping List! <br/> Click the button in the bottom right corner to add a Shopping List :)"
+        }
+        show_snack_bar(message, 3000, type);
     }
 </script>
