@@ -33,6 +33,8 @@
             <h3 class="title">Sign Up</h3>
             <form id="sign_up_form_id" name="sign_up_form" action="/signup" method="post" class="register-form">
                 
+                <input name="username" type="text" class="form-input form-control" placeholder="Username">
+
                 <input name="email" type="email" class="form-input form-control" placeholder="Email">
 
                 <input name="password" type="password" class="form-input form-control" placeholder="Password">
@@ -51,18 +53,22 @@
 
 <script type="text/javascript">
     function validate_inputs() {
+        var username_value = document.forms["sign_up_form"]["username"].value;
         var email_value = document.forms["sign_up_form"]["email"].value;
         var password_value = document.forms["sign_up_form"]["password"].value;
         var confirm_password_value = document.forms["sign_up_form"]["confirm_password"].value;
        
-        if (email_value.replace(" ", "") == "") {
+        if (username_value.replace(" ", "") == "") {
+            show_snack_bar("Please enter username", 3000, "danger")
+        }
+        else if (email_value.replace(" ", "") != email_value || email_value.length < 5) {
+            show_snack_bar("Username should not contain spaces and should be more than 5  characters long ", 3000, "danger")
+        }
+        else if (email_value.replace(" ", "") == "") {
             show_snack_bar("Please enter email", 3000, "danger")
         }
         else if (!(email_value.includes("@")) || !(email_value.split("@")[1].includes(".")) || (email_value.replace("@","").includes("@")) || email_value.includes("@.")) {
             show_snack_bar("Invalid Email Address", 3000, "danger")
-        }
-        else if (email_value.replace(" ", "") != email_value || email_value.length < 5) {
-            show_snack_bar("email should not contain spaces and should be more than 5  characters long ", 3000, "danger")
         }
         else if (password_value == "") {
             show_snack_bar("Please enter password ", 3000, "danger")

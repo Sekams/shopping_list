@@ -15,8 +15,8 @@ class TestUser(unittest.TestCase):
         self.shopping_list_2 = ShoppingList('From farmers market', {})
 
         self.shopping_lists = {self.shopping_list_1.title: self.shopping_list_1}
-        self.user_no_list = User('homie@gmail.com', 'duff', {})
-        self.user_with_list = User('marge@gmail.com', 'maggie', self.shopping_lists)
+        self.user_no_list = User('homie', 'homie@gmail.com', 'duff', {})
+        self.user_with_list = User('marge', 'marge@gmail.com', 'maggie', self.shopping_lists)
 
     def test_user_instance(self):
         """This method tests if the User class creates an instance of itself"""
@@ -25,8 +25,8 @@ class TestUser(unittest.TestCase):
 
     def test_user_attributes(self):
         """This method tests if the class assigns the right attributes to User instances"""
-        self.assertEqual('homie@gmail.com', self.user_no_list.email,
-                         msg='The object email should be `homie@gmail.com`')
+        self.assertEqual('homie', self.user_no_list.username,
+                         msg='The object username should be `homie`')
 
     def test_change_password(self):
         """This method tests if the User class changes the password of an instance"""

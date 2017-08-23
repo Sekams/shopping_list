@@ -3,8 +3,9 @@ class User(object):
     """This class describes the structure of the User object"""
 
 
-    def __init__(self, email, password, shopping_lists):
+    def __init__(self, username, email, password, shopping_lists):
         """This method creates an instance of the User class"""
+        self.username = username
         self.email = email
         self.password = password
         self.shopping_lists = shopping_lists
