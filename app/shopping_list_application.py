@@ -12,81 +12,79 @@ class ShoppingListApplication(object):
         self.logged_in = {}
         self.sharing_pool = {}
 
-    def login(self, username, password):
+    def login(self, email, password):
         """This method enables stored users to login"""
-        self.logged_in[username] = False
-        if self.users and username in self.users.keys():
-            user = self.users[username]
+        self.logged_in[email] = False
+        if self.users and email in self.users.keys():
+            user = self.users[email]
             if user.password == password:
-                self.logged_in[user.username] = True
-        return self.logged_in[username]
+                self.logged_in[user.email] = True
+        return self.logged_in[email]
 
-    def logout(self, username):
+    def logout(self, email):
         """This method enables stored users to logout"""
-        if username in self.logged_in.keys():
-            self.logged_in[username] = False
-        return self.logged_in[username]
+        if email in self.logged_in.keys():
+            self.logged_in[email] = False
+        return self.logged_in[email]
 
-    def signup(self, first_name, last_name, username, password):
+    def signup(self, email, password):
         """This method enables new users to create accounts"""
-        if username in self.users.keys():
+        if email in self.users.keys():
             return None
         new_user = User(
-            username=username,
+            email=email,
             password=password,
-            first_name=first_name,
-            last_name=last_name,
             shopping_lists={}
         )
-        self.users[new_user.username] = new_user
-        self.logged_in[new_user.username] = True
-        return self.users[new_user.username]
+        self.users[new_user.email] = new_user
+        self.logged_in[new_user.email] = True
+        return self.users[new_user.email]
 
-    def create_shopping_list(self, title, username):
+    def create_shopping_list(self, title, email):
         """This method enables logged in users to create new shopping lists"""
-        if username in self.logged_in.keys() and self.logged_in[username]:
+        if email in self.logged_in.keys() and self.logged_in[email]:
             title = title.replace("'", "`").replace('"', '``')
             new_shopping_list = ShoppingList(title, {})
-            user = self.users[username]
+            user = self.users[email]
             return user.create_shopping_list(new_shopping_list)
         return None
 
-    def edit_shopping_list(self, old_title, new_title, username):
+    def edit_shopping_list(self, old_title, new_title, email):
         """This method enables logged in users to edit their shopping lists"""
-        if username in self.logged_in.keys() and self.logged_in[username]:
+        if email in self.logged_in.keys() and self.logged_in[email]:
             new_title = new_title.replace("'", "`").replace('"', '``')
-            user = self.users[username]
+            user = self.users[email]
             return user.edit_shopping_list(old_title, new_title).title == new_title
         return None
 
-    def remove_shopping_list(self, title, username):
+    def remove_shopping_list(self, title, email):
         """This method enables logged in users to edit their shopping lists"""
-        if username in self.logged_in.keys() and self.logged_in[username]:
-            user = self.users[username]
+        if email in self.logged_in.keys() and self.logged_in[email]:
+            user = self.users[email]
             if title in user.shopping_lists.keys():
                 shopping_list = user.shopping_lists[title]
                 return user.remove_shopping_list(shopping_list)
         return None
 
-    def share_shopping_list(self, title, username):
+    def share_shopping_list(self, title, email):
         """This method enables logged in users to share their shopping lists"""
-        if username in self.logged_in.keys() and self.logged_in[username]:
-            user = self.users[username]
+        if email in self.logged_in.keys() and self.logged_in[email]:
+            user = self.users[email]
             if title in user.shopping_lists.keys():
                 not_existing = True
-                if user.username in self.sharing_pool.keys():
-                    if title in self.sharing_pool[user.username].keys():
+                if user.email in self.sharing_pool.keys():
+                    if title in self.sharing_pool[user.email].keys():
                         not_existing = False
                 if not_existing:
-                    self.sharing_pool[user.username] = {
+                    self.sharing_pool[user.email] = {
                         title: user.shopping_lists[title]}
                     return True
         return False
 
-    def add_item(self, name, list_title, price, username):
+    def add_item(self, name, list_title, price, email):
         """This method enables logged in users to add items to their shopping lists"""
-        if username in self.logged_in.keys() and self.logged_in[username]:
-            user = self.users[username]
+        if email in self.logged_in.keys() and self.logged_in[email]:
+            user = self.users[email]
             if list_title in user.shopping_lists.keys():
                 shopping_list1 = user.shopping_lists[list_title]
                 name = name.replace("'", "`").replace('"', '``')
@@ -95,10 +93,10 @@ class ShoppingListApplication(object):
                     return shopping_list1.add_item(new_item)
         return None
 
-    def edit_item(self, list_title, old_name, new_name, new_price, username):
+    def edit_item(self, list_title, old_name, new_name, new_price, email):
         """This method enables logged in users to add items to their shopping lists"""
-        if username in self.logged_in.keys() and self.logged_in[username]:
-            user = self.users[username]
+        if email in self.logged_in.keys() and self.logged_in[email]:
+            user = self.users[email]
             if list_title in user.shopping_lists.keys():
                 shopping_list2 = user.shopping_lists[list_title]
                 if old_name in shopping_list2.items.keys():
@@ -112,10 +110,10 @@ class ShoppingListApplication(object):
                     return item.name == new_name and item.price == new_price
         return False
 
-    def remove_item(self, list_title, name, username):
+    def remove_item(self, list_title, name, email):
         """This method enables logged in users to remove items from their shopping lists"""
-        if username in self.logged_in.keys() and self.logged_in[username]:
-            user = self.users[username]
+        if email in self.logged_in.keys() and self.logged_in[email]:
+            user = self.users[email]
             if list_title in user.shopping_lists.keys():
                 shopping_list3 = user.shopping_lists[list_title]
                 if name in shopping_list3.items.keys():
@@ -123,10 +121,10 @@ class ShoppingListApplication(object):
                     return shopping_list3.remove_item(item1)
         return None
 
-    def check_item_toggle(self, list_title, name, new_status, username):
+    def check_item_toggle(self, list_title, name, new_status, email):
         """This method enables logged in users to check and uncheck items on their shopping lists"""
-        if username in self.logged_in.keys() and self.logged_in[username]:
-            user = self.users[username]
+        if email in self.logged_in.keys() and self.logged_in[email]:
+            user = self.users[email]
             if list_title in user.shopping_lists.keys():
                 shopping_list4 = user.shopping_lists[list_title]
                 if name in shopping_list4.items.keys():
@@ -134,13 +132,13 @@ class ShoppingListApplication(object):
                     return item2.change_status(new_status)
         return None
 
-    def get_all_lists(self, username):
+    def get_all_lists(self, email):
         """This method gets all the shopping lists for a user"""
-        if username in self.logged_in.keys() and self.logged_in[username] and username in self.users.keys():
-            user = self.users[username]
+        if email in self.logged_in.keys() and self.logged_in[email] and email in self.users.keys():
+            user = self.users[email]
             if self.sharing_pool:
-                for share_username, shopping_list_dict in self.sharing_pool.items():
-                    if not share_username == user.username:
+                for share_email, shopping_list_dict in self.sharing_pool.items():
+                    if not share_email == user.email:
                         for title, shared_shopping_list in shopping_list_dict.items():
                             if title not in user.shopping_lists.keys():
                                 user.shopping_lists[title] = shared_shopping_list
