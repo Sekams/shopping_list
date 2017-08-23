@@ -6,6 +6,12 @@
 
 **The Shopping List Application** is a web-based application whose purpose is to help its users to create, manage, share and delete their shopping lists for the things they would like to do buy.
 
+## Progress Tracking
+https://www.pivotaltracker.com/n/projects/2092508
+
+## Heroku Deployment
+https://the-real-shopping-list.herokuapp.com/
+
 ## Technologies
 1. Python==3.6.1
 2. astroid==1.5.3
