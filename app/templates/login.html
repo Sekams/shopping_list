@@ -24,7 +24,7 @@
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a class="navbar-link" href="{{url_for('signup')}}" title="Sign Up">Have no Account? Sign Up</a>
+                        <a class="navbar-link" href="{{url_for('signup')}}" title="Sign Up">Sign Up</a>
                     </li>
                 </ul>
             </div>
@@ -35,7 +35,7 @@
         <div class="card login-card drop-shadow">
             <h3 class="title">Login</h3>
             <form id="login_form_id" name="login_form" action="/login" method="post" class="register-form">
-                <input name="username" type="text" class="form-input form-control" placeholder="Username">
+                <input name="email" type="email" class="form-input form-control" placeholder="Email">
 
                 <input name="password" type="password" class="form-input form-control" placeholder="Password">
 
@@ -51,13 +51,16 @@
 
 <script type="text/javascript">
     function validate_inputs() {
-        var username_value = document.forms["login_form"]["username"].value;
+        var email_value = document.forms["login_form"]["email"].value;
         var password_value = document.forms["login_form"]["password"].value;
-        if (username_value.replace(" ", "") == "") {
-            show_snack_bar("Please enter username", 3000, "danger")
+        if (email_value.replace(" ", "") == "") {
+            show_snack_bar("Please enter email", 3000, "danger")
         }
-        else if (username_value.replace(" ", "") != username_value || username_value.length < 3) {
-            show_snack_bar("Username should not contain spaces and should be more than 3 characters long ", 3000, "danger")
+        else if (!(email_value.includes("@")) || !(email_value.split("@")[1].includes(".")) || (email_value.replace("@","").includes("@")) || email_value.includes("@.")) {
+            show_snack_bar("Invalid Email Address", 3000, "danger")
+        }
+        else if (email_value.replace(" ", "") != email_value || email_value.length < 3) {
+            show_snack_bar("email should not contain spaces and should be more than 3 characters long ", 3000, "danger")
         }
         else if (password_value == "") {
             show_snack_bar("Please enter password ", 3000, "danger")
