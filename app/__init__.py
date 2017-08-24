@@ -10,3 +10,7 @@ app.config['SECRET_KEY'] = "this-is-secret"
 
 # Load the config file
 app.config.from_object('config')
+
+if __name__ == '__main__':
+    app.run()
+    

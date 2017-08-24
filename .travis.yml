@@ -15,3 +15,9 @@ script:
 
 after_success:
   - coveralls
+
+deploy:
+  provider: heroku
+  app: shopping-list-flask
+  api_key:
+    secure: "f5329e27-168b-45dd-85f6-585c43c8a8d1"
